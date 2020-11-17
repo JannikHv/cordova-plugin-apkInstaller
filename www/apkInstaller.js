@@ -1,7 +1,16 @@
 var exec = require('cordova/exec');
 
-module.exports = {
-    install: function(fileName, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "apkInstaller", "install", [fileName]);
-    }
-};
+class ApkInstaller {
+  /**
+   * @param {string} file
+   *
+   * @return {Promise<any>}
+   */
+  static install(file) {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, 'apkInstaller', 'install', [file]);
+    });
+  }
+}
+
+module.exports = ApkInstaller;
